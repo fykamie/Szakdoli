@@ -45,3 +45,4 @@ e2e/*.map
 # Ignore all local history of files
 .history
 .ionide
+/nyilvantarto/backend/.env
