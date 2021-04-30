@@ -26,6 +26,10 @@ app.get('/db/students', (req, res) => {
 app.get('/db/students/:studentId', (req, res) => {
     StudentModel.findById(req.params.studentId)
         .then( data => {
+            if (!data) {
+                res.statusCode = 409;
+                res.json({message: "Nem létezik ilyen diák!"})
+            }
             res.json(data);
         })
         .catch( error => res.json({message: error}));
@@ -42,7 +46,7 @@ app.post('/db/addStudent', (req, res) => {
         .then( data => {
             res.json(data);
         })
-        .catch( error => res.json({message: error}));
+        .catch( error => res.json({message: error.message}));
 });
 
 app.delete('/db/students/:studentId', (req, res) => {
@@ -54,12 +58,16 @@ app.delete('/db/students/:studentId', (req, res) => {
             }
             res.json("Ok");
         })
-        .catch( error => res.json({message: error}));
+        .catch( error => res.json({message: error.message}));
 });
 
 app.patch('/db/students/:studentId', async (req, res) => {
     try {
         const toBeUpdated = await StudentModel.findById(req.params.studentId);
+        if (!toBeUpdated) {
+            res.json({message: "Nem létező diák adatait szeretné módosítani!"})
+            return;
+        }
        if (req.body.name) {
            toBeUpdated.name = req.body.name;
        }
@@ -70,20 +78,33 @@ app.patch('/db/students/:studentId', async (req, res) => {
            { _id: req.params.studentId },
            { $set: {name: toBeUpdated.name, hourfee: toBeUpdated.hourfee} }
         );
+        if (updated.nModified <= 0) {
+            res.statusCode = 4001
+            res.json({message: "Nem történt változtatás."});
+        }
         res.json(updated);
     } catch (error) {
-        res.json({message: error});
+        res.json({message: error.message});
     }
 });
 
 app.get('/db/students/addAppearance/:studentId', async (req, res) => {
     try {
         const toBeUpdated = await StudentModel.findById(req.params.studentId);
+        if (!toBeUpdated) {
+            res.statusCode = 409;
+            res.json({message: "Nem létezik ilyen diák!"})
+            return;
+        }
         toBeUpdated.balance = toBeUpdated.balance - toBeUpdated.hourfee;
         const updated = await StudentModel.updateOne(
            { _id: req.params.studentId },
            { $set: {balance: toBeUpdated.balance} }
         );
+        if (updated.nModified <= 0) {
+            res.statusCode = 4001
+            res.json({message: "Nem történt változtatás."});
+        }
         res.json(updated);
     } catch (error) {
         res.json({message: error});
@@ -93,11 +114,26 @@ app.get('/db/students/addAppearance/:studentId', async (req, res) => {
 app.post('/db/students/addPayment/:studentId', async (req, res) => {
     try {
         const toBeUpdated = await StudentModel.findById(req.params.studentId);
-        toBeUpdated.balance = toBeUpdated.balance + req.body.payment;
+        const payment = req.body.payment;
+        if (!toBeUpdated) {
+            res.statusCode = 409;
+            res.json({message: "Nem létezik ilyen diák!"})
+            return;
+        }
+        if (!payment || !Number(payment)) {
+            res.statusCode = 409;
+            res.json({message: "Nem megfelelő formátumú fizetség!"});
+            return;
+        }
+        toBeUpdated.balance = toBeUpdated.balance + payment;
         const updated = await StudentModel.updateOne(
            { _id: req.params.studentId },
            { $set: {balance: toBeUpdated.balance} }
         );
+        if (updated.nModified <= 0) {
+            res.statusCode = 4001
+            res.json({message: "Nem történt változtatás."});
+        }
         res.json(updated);
     } catch (error) {
         res.json({message: error});
