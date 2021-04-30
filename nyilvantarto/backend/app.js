@@ -57,6 +57,25 @@ app.delete('/db/students/:studentId', (req, res) => {
         .catch( error => res.json({message: error}));
 });
 
+app.patch('/db/students/:studentId', async (req, res) => {
+    try {
+        const toBeUpdated = await StudentModel.findById(req.params.studentId);
+       if (req.body.name) {
+           toBeUpdated.name = req.body.name;
+       }
+       if (req.body.hourfee) {
+           toBeUpdated.hourfee = req.body.hourfee;
+       }
+       const updated = await StudentModel.updateOne(
+           { _id: req.params.studentId },
+           { $set: {name: toBeUpdated.name, hourfee: toBeUpdated.hourfee} }
+        );
+        res.json(updated);
+    } catch (error) {
+        res.json({message: error});
+    }
+});
+
 //Connect to DB
 mongoose.connect(
     process.env.DB_CONNECTION,
