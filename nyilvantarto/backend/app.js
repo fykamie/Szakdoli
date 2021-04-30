@@ -45,6 +45,18 @@ app.post('/db/addStudent', (req, res) => {
         .catch( error => res.json({message: error}));
 });
 
+app.delete('/db/students/:studentId', (req, res) => {
+    StudentModel.remove({_id: req.params.studentId})
+        .then( data => {
+            if (data.deletedCount<=0) {
+                res.statusCode = 409;
+                res.json({message: "Nem létező diákot akart törölni."});
+            }
+            res.json("Ok");
+        })
+        .catch( error => res.json({message: error}));
+});
+
 //Connect to DB
 mongoose.connect(
     process.env.DB_CONNECTION,
