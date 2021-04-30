@@ -76,6 +76,22 @@ app.patch('/db/students/:studentId', async (req, res) => {
     }
 });
 
+app.get('/db/students/addAppearance/:studentId', async (req, res) => {
+    try {
+        const toBeUpdated = await StudentModel.findById(req.params.studentId);
+        toBeUpdated.balance = toBeUpdated.balance - toBeUpdated.hourfee;
+        console.log(toBeUpdated.balance);
+        
+        const updated = await StudentModel.updateOne(
+           { _id: req.params.studentId },
+           { $set: {balance: toBeUpdated.balance} }
+        );
+        res.json(updated);
+    } catch (error) {
+        res.json({message: error});
+    }
+});
+
 //Connect to DB
 mongoose.connect(
     process.env.DB_CONNECTION,
