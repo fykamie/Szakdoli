@@ -1,13 +1,13 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-
 const StudentModel = require('./models/student');
+
 const app = express();
-require('dotenv/config'); // DB connenction on mlab.com
-
 const port = 4201;
+require('dotenv/config'); // DB connenction on mlab.com in file
 
+//Middlewares
 app.use(bodyParser.json());
 
 //ROUTES
@@ -17,6 +17,14 @@ app.get('/', (req, res) => {
 
 app.get('/db/students', (req, res) => {
     StudentModel.find()
+        .then( data => {
+            res.json(data);
+        })
+        .catch( error => res.json({message: error}));
+});
+
+app.get('/db/students/:studentId', (req, res) => {
+    StudentModel.findById(req.params.studentId)
         .then( data => {
             res.json(data);
         })
