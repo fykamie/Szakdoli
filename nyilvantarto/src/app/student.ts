@@ -2,9 +2,9 @@ export class Student {
     readonly _id: string;
     public name: string;
     public hourfee: number;
-    readonly balance: number = 0;
+     balance: number = 0;
 
-    public Student() {
+    constructor() {
         this.name = "";
         this.hourfee = 0;
     }

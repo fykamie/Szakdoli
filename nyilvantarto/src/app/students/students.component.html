@@ -1,0 +1,28 @@
+<div class="filters flex">
+    <div class="search flex">
+        <p class="search-text">Szűrés:</p>
+        <input class="search-key" type="text" class="search-key"/>
+    </div>
+    <div class="filter-minus-balance">
+        <input type="checkbox" class="isOwe" name="isOwe" checked/>
+        <label for="isOwe">Tartozik</label>
+    </div>
+    <div class="filter-zero-balance">
+        <input type="checkbox" class="isOwe" name="isOwe" checked/>
+        <label for="isOwe">Null számlás</label>
+    </div>
+    <div class="filter-plus-balance">
+        <input type="checkbox" class="isOwe" name="isOwe" checked/>
+        <label for="isOwe">Plusz számlás</label>
+    </div>
+</div>
+<div class="students">
+    <div class="student flex" *ngFor="let student of students">
+        <div class="student-name-container">
+            <button class="student-name" [ngClass]="{'red': student.balance < 0, 'green': student.balance > 0}">{{student.name}}</button>
+            <button class="student-modify">M</button>
+        </div>
+        <p class="student-balance" [ngClass]="{'red': student.balance < 0, 'green': student.balance > 0}">{{student.balance}} Ft</p>
+        <button class="student-delete">X</button>
+    </div>
+</div>
