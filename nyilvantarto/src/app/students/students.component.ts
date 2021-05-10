@@ -18,6 +18,24 @@ export class StudentsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  public countZeroBalance(): number {
+    return this.students.filter(student => student.balance == 0).length;
+  }
+
+  public countPlusBalance(): number {
+    return this.students.filter(student => student.balance > 0).length;
+  }
+
+  public countMinusBalance(): number {
+    return this.students.filter(student => student.balance < 0).length;
+  }
+
+  public deleteStudent(index: number): void {
+    if (confirm(`Biztos törlöd ${this.students[index].name} nevű tanulót és adatait a rendszerből?`)) {
+      this.students.splice(index, 1);
+    }
+  }
+
   private async mockStudents(): Promise<void> {
     for (let index = 0; index < 20; index++) {
       let tmpStudent = new Student();

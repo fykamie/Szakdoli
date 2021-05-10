@@ -2,6 +2,11 @@
     display: flex
     align-items: center
 
+.title
+    text-align: center
+    font-size: 26px
+    margin: 16px
+
 .search-key
     border: none
     border-bottom: 1px solid black
@@ -14,6 +19,11 @@
 .filters
     background: #967BB6
     color: white
+    height: 35px
+    justify-content: center
+    font-size: 14px
+    > div
+        margin: 5px
 
 .student-name, .student-balance, .student-modify
     margin: 5px
@@ -57,5 +67,25 @@
     top: 0
     right: 0
 
-button:hover
+button:hover, input[type="checkbox"]:hover
     cursor: pointer
+
+.students
+    display: flex
+    flex-wrap: wrap
+
+.add-student
+    text-align: center
+    > button
+        font-size: 15px
+        border: 2px solid #967BB6
+        margin: 10px
+        background: transparent
+        color: #967BB6
+        font-weight: bold
+        padding: 8px
+        height: 36px
+        width: 105px
+        &:hover
+            background: #967BB6
+            color: white
