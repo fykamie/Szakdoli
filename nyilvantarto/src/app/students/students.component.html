@@ -2,7 +2,8 @@
 <div class="filters flex">
     <div class="search flex">
         <p class="search-text">Szűrés:</p>
-        <input class="search-key" type="text" class="search-key"/>
+        <input class="search-key" type="text" class="search-key" [(ngModel)]="filtering.searchKey"/>
+        {{filtering.searchKey}}
     </div>
     <div class="filter-minus-balance">
         <input type="checkbox" class="isOwe" name="isOwe" checked/>
@@ -21,7 +22,7 @@
     <button skipLocationChange routerLink="/newStudent">Új tanuló</button>
 </div>
 <div class="students">
-    <div class="student flex" *ngFor="let student of students, let index = index">
+    <div class="student flex" *ngFor="let student of students | search: filtering.searchKey, let index = index">
         <div class="student-name-container">
             <button class="student-name" [ngClass]="{'red': student.balance < 0, 'green': student.balance > 0}">{{student.name}}</button>
             <button class="student-modify" skipLocationChange routerLink="/modifyStudent" (click)="modifySV.student = student">M</button>

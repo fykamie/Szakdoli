@@ -8,6 +8,7 @@ import { AddStudentComponent } from './add-student/add-student.component';
 import { FormsModule } from '@angular/forms';
 import { DigitOnlyDirective } from './digit-only.directive';
 import { ModifyStudentComponent } from './modify-student/modify-student.component';
+import { SearchPipe } from './search.pipe';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { ModifyStudentComponent } from './modify-student/modify-student.componen
     StudentsComponent,
     AddStudentComponent,
     DigitOnlyDirective,
-    ModifyStudentComponent
+    ModifyStudentComponent,
+    SearchPipe
   ],
   imports: [
     BrowserModule,
