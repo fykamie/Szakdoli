@@ -7,6 +7,7 @@ import { Student } from './student';
 })
 export class ServerService {
   private _baseStudentURL = "http://localhost:4201/db/students";
+  private _addStudentURL = "http://localhost:4201/db/addStudent";
 
   constructor() { }
 
@@ -28,5 +29,23 @@ export class ServerService {
       if(response.ok) return "Ok";
       return response.json();
     }).catch(error => error)
+  }
+
+  public async addStudent(student: Student) {
+    return fetch(this._addStudentURL, {
+      method: 'POST',
+      mode: 'cors',
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(student)
+    }).then(response => {
+      if (response.ok) {
+        return response.json()
+      }
+      return false
+    }).then(addedStudent => addedStudent).
+    catch(error => error);
   }
 }
