@@ -2,12 +2,14 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const StudentModel = require('./models/student');
+const cors = require('cors');
 
 const app = express();
 const port = 4201;
 require('dotenv/config'); // DB connenction on mlab.com in file
 
 //Middlewares
+app.use(cors);
 app.use(bodyParser.json());
 
 //ROUTES
