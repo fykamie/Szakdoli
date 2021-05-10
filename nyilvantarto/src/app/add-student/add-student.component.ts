@@ -16,6 +16,11 @@ export class AddStudentComponent implements OnInit {
   }
 
   public save(){
+    let validation = this.student.getValidation();
+    if (validation.isValide) {
+    } else {
+      alert(validation.validationMsg);
+    }
   }
 
 }

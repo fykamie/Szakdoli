@@ -1,14 +1,15 @@
 <div class="student">
-    <div class="name-container flex">
+    <h3 class="title">Új tanuló</h3>
+    <div class="container flex">
         <p class="name-text">Név:</p>
         <input type="text" class="name" [(ngModel)]="student.name">
     </div>
-    <div class="hourfee-container flex">
-        <p class="name-text">Óradíj:</p>
-        <input type="number" min="0" class="name" [(ngModel)]="student.hourfee" appDigitOnly>
+    <div class="container flex">
+        <p class="hourfee-text">Óradíj:</p>
+        <input type="number" min="0" class="hourfee" [(ngModel)]="student.hourfee" appDigitOnly>
     </div>
     <div class="buttons">
-        <button class="save">Ok</button>
         <button class="back" routerLink="/">Vissza</button>
+        <button class="save" (click)="save()">Mentés</button>
     </div>
 </div>

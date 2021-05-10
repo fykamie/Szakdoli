@@ -13,5 +13,6 @@ export class Student {
         if (!this.name) return {isValide: false, validationMsg: "Hiányzó név"};
         if (!this.hourfee) return {isValide: false, validationMsg: "Hiányzó óradíj"};
         if (!Number(this.hourfee) || this.hourfee < 1) return {isValide: false, validationMsg: "Nem megfelelő formátumú óradíj"};
+        return {isValide: true, validationMsg: ""}
     }
 }
