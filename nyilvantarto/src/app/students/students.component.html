@@ -24,7 +24,7 @@
     <div class="student flex" *ngFor="let student of students, let index = index">
         <div class="student-name-container">
             <button class="student-name" [ngClass]="{'red': student.balance < 0, 'green': student.balance > 0}">{{student.name}}</button>
-            <button class="student-modify">M</button>
+            <button class="student-modify" skipLocationChange routerLink="/modifyStudent" (click)="modifySV.student = student">M</button>
         </div>
         <p class="student-balance" [ngClass]="{'red': student.balance < 0, 'green': student.balance > 0}">{{student.balance}} Ft</p>
         <button class="student-delete" (click)="deleteStudent(index)">X</button>

@@ -7,13 +7,15 @@ import { StudentsComponent } from './students/students.component';
 import { AddStudentComponent } from './add-student/add-student.component';
 import { FormsModule } from '@angular/forms';
 import { DigitOnlyDirective } from './digit-only.directive';
+import { ModifyStudentComponent } from './modify-student/modify-student.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     StudentsComponent,
     AddStudentComponent,
-    DigitOnlyDirective
+    DigitOnlyDirective,
+    ModifyStudentComponent
   ],
   imports: [
     BrowserModule,

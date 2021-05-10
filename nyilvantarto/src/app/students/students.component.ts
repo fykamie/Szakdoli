@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ModifyService } from '../modify.service';
 import { ServerService } from '../server.service';
 import { Student } from '../student';
 
@@ -12,7 +13,7 @@ export class StudentsComponent implements OnInit {
 
   students = [];
 
-  constructor(private router: Router, public server: ServerService) {
+  constructor(private router: Router, public server: ServerService, public modifySV: ModifyService) {
     server.getStudents().then(storedStudents => {
       if (!Array.isArray(storedStudents)) alert(`Hiba a tanulók lekérésekor.\n${storedStudents}`);
       storedStudents.forEach(student => {
