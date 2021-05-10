@@ -12,7 +12,7 @@ export class StudentsComponent implements OnInit {
 
   students = [];
 
-  constructor(private router: Router, server: ServerService) {
+  constructor(private router: Router, public server: ServerService) {
     server.getStudents().then(storedStudents => {
       if (!Array.isArray(storedStudents)) alert(`Hiba a tanulók lekérésekor.\n${storedStudents}`);
       storedStudents.forEach(student => {
@@ -38,7 +38,13 @@ export class StudentsComponent implements OnInit {
 
   public deleteStudent(index: number): void {
     if (confirm(`Biztos törlöd ${this.students[index].name} nevű tanulót és adatait a rendszerből?`)) {
-      this.students.splice(index, 1);
+      this.server.deleteStudent(this.students[index]._id).then(deleteInfo => {
+        if (deleteInfo.message) {
+          alert(deleteInfo.message);
+          return;
+        }
+        this.students.splice(index, 1);
+      });
     }
   }
 
