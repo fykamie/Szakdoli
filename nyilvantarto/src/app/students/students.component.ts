@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Student } from '../student';
 
 @Component({
@@ -10,7 +11,7 @@ export class StudentsComponent implements OnInit {
 
   students = [];
 
-  constructor() {
+  constructor(private router: Router) {
     this.mockStudents();
     
    }
