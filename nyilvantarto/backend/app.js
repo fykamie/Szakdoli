@@ -9,7 +9,7 @@ const port = 4201;
 require('dotenv/config'); // DB connenction on mlab.com in file
 
 //Middlewares
-app.use(cors);
+app.use(cors());
 app.use(bodyParser.json());
 
 //ROUTES
