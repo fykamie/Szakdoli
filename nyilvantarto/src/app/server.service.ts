@@ -10,7 +10,12 @@ export class ServerService {
 
   constructor() { }
 
-  public async getStudents(): Promise<Student[]> {
-    return fetch(this._getStudentsURL).then(res => {console.log(res); return []})
+  public async getStudents() {
+    return fetch(this._getStudentsURL).then(response => {
+      if (response.ok) {
+        return response.json()
+      }
+      return []
+    }).catch(error => error)
   }
 }
