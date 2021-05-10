@@ -81,8 +81,9 @@ app.patch('/db/students/:studentId', async (req, res) => {
            { $set: {name: toBeUpdated.name, hourfee: toBeUpdated.hourfee} }
         );
         if (updated.nModified <= 0) {
-            res.statusCode = 4001
+            res.statusCode = 400;
             res.json({message: "Nem történt változtatás."});
+            return;
         }
         res.json(updated);
     } catch (error) {

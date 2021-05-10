@@ -48,4 +48,17 @@ export class ServerService {
     }).then(addedStudent => addedStudent).
     catch(error => error);
   }
+
+  public async modifyStudent(student) {
+    return fetch( `${this._baseStudentURL}/${student._id}`, {
+      method: 'PATCH',
+      mode: 'cors',
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(student)
+    }).then(response => response.json()).
+    catch(error => error);
+  }
 }
