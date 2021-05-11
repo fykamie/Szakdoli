@@ -2,7 +2,8 @@ export class Student {
     readonly _id: string;
     public name: string;
     public hourfee: number;
-     balance: number = 0;
+    readonly balance: number = 0;
+    public isShown = false;
 
     constructor() {
         this.name = "";

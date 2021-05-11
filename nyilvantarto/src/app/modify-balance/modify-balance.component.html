@@ -1,0 +1,14 @@
+<div class="modify-balance-page">
+    <p class="student-name">{{student.name}}</p>
+    <p class="student-balance">Egyenlege: {{student.balance}}Ft</p>
+    <div class="student-owe-container flex">
+        <p class="student-owe-text">Tartozik:</p>
+        <input type="number" class="student owe" min="0" [(value)]="student.hourfee" appDigitOnly/>
+    </div>
+    <div class="student-pay-container flex">
+        <p class="student-pay-text">Fizetett:</p>
+        <input type="number" class="student-payed" min="0" value="0" appDigitOnly/>
+    </div>
+    <button (click)="save()">Ok</button>
+    <button (click)='student.isShown= false'>Vissza</button>
+</div>

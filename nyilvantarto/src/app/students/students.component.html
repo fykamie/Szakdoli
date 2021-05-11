@@ -30,9 +30,10 @@
                     | isShowPlusbalance: isShowPlusBalance,
                     let index = index"
         >
+        <app-modify-balance *ngIf="student.isShown" [student]="student" ></app-modify-balance>
             <div class="student-name-container">
                 <button class="student-modify" skipLocationChange routerLink="/modifyStudent" (click)="modifySV.student = student"></button>
-                <button class="student-name" [ngClass]="{'red': student.balance < 0, 'green': student.balance > 0}">{{student.name}}</button>
+                <button class="student-name" [ngClass]="{'red': student.balance < 0, 'green': student.balance > 0}" (click)="student.isShown = true">{{student.name}}</button>
             </div>
             <p class="student-balance" [ngClass]="{'red': student.balance < 0, 'green': student.balance > 0}">{{student.balance}} Ft</p>
             <button class="student-delete" (click)="deleteStudent(index)"></button>

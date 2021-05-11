@@ -12,6 +12,7 @@ import { SearchPipe } from './search.pipe';
 import { IsShowMinusbalancePipe } from './is-show-minusbalance.pipe';
 import { IsShowZerobalancePipe } from './is-show-zerobalance.pipe';
 import { IsShowPlusbalancePipe } from './is-show-plusbalance.pipe';
+import { ModifyBalanceComponent } from './modify-balance/modify-balance.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { IsShowPlusbalancePipe } from './is-show-plusbalance.pipe';
     SearchPipe,
     IsShowMinusbalancePipe,
     IsShowZerobalancePipe,
-    IsShowPlusbalancePipe
+    IsShowPlusbalancePipe,
+    ModifyBalanceComponent
   ],
   imports: [
     BrowserModule,

@@ -91,15 +91,21 @@ app.patch('/db/students/:studentId', async (req, res) => {
     }
 });
 
-app.get('/db/students/addAppearance/:studentId', async (req, res) => {
+app.post('/db/students/addAppearance/:studentId', async (req, res) => {
     try {
+        const owe = req.body.owe;
+        if (!owe || !Number(owe)) {
+            res.statusCode = 409;
+            res.json({message: "Nem megfelelő formátumú fizetség!"});
+            return;
+        }
         const toBeUpdated = await StudentModel.findById(req.params.studentId);
         if (!toBeUpdated) {
             res.statusCode = 409;
             res.json({message: "Nem létezik ilyen diák!"})
             return;
         }
-        toBeUpdated.balance = toBeUpdated.balance - toBeUpdated.hourfee;
+        toBeUpdated.balance = toBeUpdated.balance - owe;
         const updated = await StudentModel.updateOne(
            { _id: req.params.studentId },
            { $set: {balance: toBeUpdated.balance} }
