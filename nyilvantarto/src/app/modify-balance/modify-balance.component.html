@@ -2,12 +2,14 @@
     <p class="student-name">{{student.name}}</p>
     <p class="student-balance">Egyenlege: {{student.balance}}Ft</p>
     <div class="student-owe-container flex">
-        <p class="student-owe-text">Tartozik:</p>
-        <input type="number" class="student owe" min="0" [(value)]="student.hourfee" appDigitOnly/>
+        <p class="student-owe-text">Tartozás:</p>
+        <input type="number" class="student owe" min="0" [(ngModel)]="oweAmount" appDigitOnly/>
+        <button class="add-appearance" (click)="oweAmount = oweAmount + student.hourfee">Óradíj</button>
     </div>
     <div class="student-pay-container flex">
         <p class="student-pay-text">Fizetett:</p>
-        <input type="number" class="student-payed" min="0" value="0" appDigitOnly/>
+        <input type="number" class="student-payed" min="0" [(ngModel)]="payment" appDigitOnly/>
+        <button class="add-appearance" (click)="payment = payment + student.hourfee">Óradíj</button>
     </div>
     <button (click)="save()">Ok</button>
     <button (click)='student.isShown= false'>Vissza</button>

@@ -7,13 +7,30 @@ import { Student } from '../student';
   styleUrls: ['./modify-balance.component.sass']
 })
 export class ModifyBalanceComponent implements OnInit {
-  @Input() student: Student
+  @Input() student: Student;
 
-  constructor() { }
+  public oweAmount: number;
+  public payment: number;
+
+  constructor() {
+    this.oweAmount = 0;
+    this.payment = 0;
+  }
 
   ngOnInit(): void {
   }
 
-  public save() {}
+  public save() {
+    if (!this.oweAmount && !this.payment) {
+      alert("Nincs megadva sem a tartozás, sem a fizetség!");
+      return;
+    }
+    if (this.oweAmount) {
+      this.student.balance -= this.oweAmount;
+    }
+    if (this.payment) {
+      this.student.balance += this.payment;
+    }
+  }
 
 }
