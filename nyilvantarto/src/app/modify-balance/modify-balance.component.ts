@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { ServerService } from '../server.service';
 import { Student } from '../student';
 
 @Component({
@@ -12,7 +13,7 @@ export class ModifyBalanceComponent implements OnInit {
   public oweAmount: number;
   public payment: number;
 
-  constructor() {
+  constructor(public server: ServerService) {
     this.oweAmount = 0;
     this.payment = 0;
   }
@@ -20,16 +21,30 @@ export class ModifyBalanceComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public save() {
+  public async save() {
     if (!this.oweAmount && !this.payment) {
       alert("Nincs megadva sem a tartozás, sem a fizetség!");
       return;
     }
     if (this.oweAmount) {
-      this.student.balance -= this.oweAmount;
+      await this.server.addOweTo(this.student._id, this.oweAmount).then(newBalance => {
+        if (newBalance.message) {
+          alert(newBalance.message);
+          return;
+        }
+        alert("Sikeresen elkönyvelt tartozás!");
+        this.student.balance = newBalance;
+      })
     }
     if (this.payment) {
-      this.student.balance += this.payment;
+      await this.server.addPaymentTo(this.student._id, this.payment).then(newBalance => {
+        if (newBalance.message) {
+          alert(newBalance.message);
+          return;
+        }
+        alert("Sikeres fizetés!");
+        this.student.balance = newBalance;
+      });
     }
   }
 
