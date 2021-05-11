@@ -2,18 +2,18 @@
 <div class="filters flex">
     <div class="search flex">
         <p class="search-text">Szűrés:</p>
-        <input class="search-key" type="text" class="search-key" [(ngModel)]="filtering.searchKey"/>
+        <input class="search-key" type="text" class="search-key" [(ngModel)]="searchKey"/>
     </div>
     <div class="filter-minus-balance">
-        <input type="checkbox" class="isOwe" name="isOwe" checked [(ngModel)]="filtering.isShowMinusBalance"/>
+        <input type="checkbox" class="isOwe" name="isOwe" [(ngModel)]="isShowMinusBalance"/>
         <label for="isOwe">Tartozik ({{countMinusBalance()}})</label>
     </div>
     <div class="filter-zero-balance">
-        <input type="checkbox" class="isOwe" name="isOwe" checked [(ngModel)]="filtering.isShowZeroBalance"/>
+        <input type="checkbox" class="isOwe" name="isOwe" checked [(ngModel)]="isShowZeroBalance"/>
         <label for="isOwe">Null számlás ({{countZeroBalance()}})</label>
     </div>
     <div class="filter-plus-balance">
-        <input type="checkbox" class="isOwe" name="isOwe" checked [(ngModel)]="filtering.isShowPlusBalance"/>
+        <input type="checkbox" class="isOwe" name="isOwe" checked [(ngModel)]="isShowPlusBalance"/>
         <label for="isOwe">Plusz számlás ({{countPlusBalance()}})</label>
     </div>
 </div>
@@ -23,10 +23,10 @@
 <div class="students">
     <div class="student flex"
          *ngFor="let student of students
-                | search: filtering.searchKey
-                | isShowMinusbalance: filtering.isShowMinusBalance
-                | isShowZerobalance: filtering.isShowZeroBalance
-                | isShowPlusbalance: filtering.isShowPlusBalance,
+                | search: searchKey
+                | isShowMinusbalance: isShowMinusBalance
+                | isShowZerobalance: isShowZeroBalance
+                | isShowPlusbalance: isShowPlusBalance,
                 let index = index"
     >
         <div class="student-name-container">
