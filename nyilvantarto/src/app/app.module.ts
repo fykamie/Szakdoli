@@ -9,6 +9,9 @@ import { FormsModule } from '@angular/forms';
 import { DigitOnlyDirective } from './digit-only.directive';
 import { ModifyStudentComponent } from './modify-student/modify-student.component';
 import { SearchPipe } from './search.pipe';
+import { IsShowMinusbalancePipe } from './is-show-minusbalance.pipe';
+import { IsShowZerobalancePipe } from './is-show-zerobalance.pipe';
+import { IsShowPlusbalancePipe } from './is-show-plusbalance.pipe';
 
 @NgModule({
   declarations: [
@@ -17,7 +20,10 @@ import { SearchPipe } from './search.pipe';
     AddStudentComponent,
     DigitOnlyDirective,
     ModifyStudentComponent,
-    SearchPipe
+    SearchPipe,
+    IsShowMinusbalancePipe,
+    IsShowZerobalancePipe,
+    IsShowPlusbalancePipe
   ],
   imports: [
     BrowserModule,

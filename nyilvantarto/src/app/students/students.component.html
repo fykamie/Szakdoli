@@ -3,18 +3,17 @@
     <div class="search flex">
         <p class="search-text">Szűrés:</p>
         <input class="search-key" type="text" class="search-key" [(ngModel)]="filtering.searchKey"/>
-        {{filtering.searchKey}}
     </div>
     <div class="filter-minus-balance">
-        <input type="checkbox" class="isOwe" name="isOwe" checked/>
+        <input type="checkbox" class="isOwe" name="isOwe" checked [(ngModel)]="filtering.isShowMinusBalance"/>
         <label for="isOwe">Tartozik ({{countMinusBalance()}})</label>
     </div>
     <div class="filter-zero-balance">
-        <input type="checkbox" class="isOwe" name="isOwe" checked/>
+        <input type="checkbox" class="isOwe" name="isOwe" checked [(ngModel)]="filtering.isShowZeroBalance"/>
         <label for="isOwe">Null számlás ({{countZeroBalance()}})</label>
     </div>
     <div class="filter-plus-balance">
-        <input type="checkbox" class="isOwe" name="isOwe" checked/>
+        <input type="checkbox" class="isOwe" name="isOwe" checked [(ngModel)]="filtering.isShowPlusBalance"/>
         <label for="isOwe">Plusz számlás ({{countPlusBalance()}})</label>
     </div>
 </div>
@@ -22,7 +21,14 @@
     <button skipLocationChange routerLink="/newStudent">Új tanuló</button>
 </div>
 <div class="students">
-    <div class="student flex" *ngFor="let student of students | search: filtering.searchKey, let index = index">
+    <div class="student flex"
+         *ngFor="let student of students
+                | search: filtering.searchKey
+                | isShowMinusbalance: filtering.isShowMinusBalance
+                | isShowZerobalance: filtering.isShowZeroBalance
+                | isShowPlusbalance: filtering.isShowPlusBalance,
+                let index = index"
+    >
         <div class="student-name-container">
             <button class="student-name" [ngClass]="{'red': student.balance < 0, 'green': student.balance > 0}">{{student.name}}</button>
             <button class="student-modify" skipLocationChange routerLink="/modifyStudent" (click)="modifySV.student = student">M</button>
