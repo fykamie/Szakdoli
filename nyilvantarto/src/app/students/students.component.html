@@ -35,7 +35,8 @@
                 <button class="student-modify" skipLocationChange routerLink="/modifyStudent" (click)="modifySV.student = student"></button>
                 <button class="student-name" [ngClass]="{'red': student.balance < 0, 'green': student.balance > 0}" (click)="student.isShown = true">{{student.name}}</button>
             </div>
-            <p class="student-balance" [ngClass]="{'red': student.balance < 0, 'green': student.balance > 0}">{{student.balance}} Ft</p>
+            <p class="student-balance">Egyenleg: {{student.balance}} Ft</p>
+            <p class="student-hourfee">Óradíj: {{student.hourfee}} Ft</p>
             <button class="student-delete" (click)="deleteStudent(index)"></button>
         </div>
     </div>

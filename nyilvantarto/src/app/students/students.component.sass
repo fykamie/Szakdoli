@@ -26,8 +26,12 @@
     > div
         margin: 5px
 
-.student-name, .student-balance
+.student-name, .student-balance, .student-hourfee
     margin: 5px
+
+.student-hourfee
+    font-size: 13px
+    font-style: italic
 
 .student-name
     font-weight: bold
@@ -35,23 +39,9 @@
     border: none
     background: transparent
     padding: 0
-    margin-top: 26px
     &:hover
        font-size: 18px
        text-decoration: underline
-
-.student-modify
-    border: none
-    background-image: url('../../assets/pencil.png')
-    background-size: contain
-    background-position: center
-    background-repeat: no-repeat
-    background-color: transparent
-    width: 24px
-    height: 24px
-    position: absolute
-    top: 3px
-    left: 5px
 
 .red
     color: red
@@ -67,28 +57,31 @@
     position: relative
     background: white
     justify-content: center
+    height: 205px
 
 .student-delete, .student-modify
+    background-size: 22px 22px
+    background-position: center
+    background-repeat: no-repeat
+    background-color: #967BB6
+    width: 26px
+    height: 26px
+    position: absolute
+    top: 0px
     &:hover
+        background-size: 26px 26px
         height: 30px
         width: 30px
-        border-radius: 25%
-        border: 2px solid #967BB6
 
-
+.student-modify
+    border: none
+    background-image: url('../../assets/pencil.png')
+    left: 0px
 
 .student-delete
     border: none
     background-image: url('../../assets/trash.png')
-    background-size: contain
-    background-position: center
-    background-repeat: no-repeat
-    background-color: transparent
-    height: 24px
-    width: 24px
-    position: absolute
-    top: 3px
-    right: 5px
+    right: 0px
 
 
 .students

@@ -11,6 +11,8 @@
         <input type="number" class="student-payed" min="0" [(ngModel)]="payment" appDigitOnly/>
         <button class="add-appearance" (click)="payment = payment + student.hourfee">Óradíj</button>
     </div>
-    <button (click)="save()">Ok</button>
-    <button (click)='student.isShown= false'>Vissza</button>
+    <div class="buttons">
+        <button (click)='student.isShown= false'>Vissza</button>
+        <button (click)="save()">Könyvelés</button>
+    </div>
 </div>
