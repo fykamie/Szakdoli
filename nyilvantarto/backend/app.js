@@ -111,10 +111,10 @@ app.post('/db/students/addAppearance/:studentId', async (req, res) => {
            { $set: {balance: toBeUpdated.balance} }
         );
         if (updated.nModified <= 0) {
-            res.statusCode = 4001
+            res.statusCode = 400
             res.json({message: "Nem történt változtatás."});
         }
-        res.json(updated);
+        res.json(toBeUpdated.balance);
     } catch (error) {
         res.json({message: error});
     }
@@ -140,10 +140,10 @@ app.post('/db/students/addPayment/:studentId', async (req, res) => {
            { $set: {balance: toBeUpdated.balance} }
         );
         if (updated.nModified <= 0) {
-            res.statusCode = 4001
+            res.statusCode = 400
             res.json({message: "Nem történt változtatás."});
         }
-        res.json(updated);
+        res.json(toBeUpdated.balance);
     } catch (error) {
         res.json({message: error});
     }
