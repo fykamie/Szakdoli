@@ -1,39 +1,41 @@
 <h3 class="title">Tanulók és egyenlegeik:</h3>
-<div class="filters flex">
-    <div class="search flex">
-        <p class="search-text">Szűrés:</p>
-        <input class="search-key" type="text" class="search-key" [(ngModel)]="searchKey"/>
-    </div>
-    <div class="filter-minus-balance">
-        <input type="checkbox" class="isOwe" name="isOwe" [(ngModel)]="isShowMinusBalance"/>
-        <label for="isOwe">Tartozik ({{countMinusBalance()}})</label>
-    </div>
-    <div class="filter-zero-balance">
-        <input type="checkbox" class="isOwe" name="isOwe" checked [(ngModel)]="isShowZeroBalance"/>
-        <label for="isOwe">Null számlás ({{countZeroBalance()}})</label>
-    </div>
-    <div class="filter-plus-balance">
-        <input type="checkbox" class="isOwe" name="isOwe" checked [(ngModel)]="isShowPlusBalance"/>
-        <label for="isOwe">Plusz számlás ({{countPlusBalance()}})</label>
-    </div>
-</div>
-<div class="add-student">
-    <button skipLocationChange routerLink="/newStudent">Új tanuló</button>
-</div>
-<div class="students">
-    <div class="student flex"
-         *ngFor="let student of students
-                | search: searchKey
-                | isShowMinusbalance: isShowMinusBalance
-                | isShowZerobalance: isShowZeroBalance
-                | isShowPlusbalance: isShowPlusBalance,
-                let index = index"
-    >
-        <div class="student-name-container">
-            <button class="student-name" [ngClass]="{'red': student.balance < 0, 'green': student.balance > 0}">{{student.name}}</button>
-            <button class="student-modify" skipLocationChange routerLink="/modifyStudent" (click)="modifySV.student = student">M</button>
+<div class="students-page">
+    <div class="filters flex">
+        <div class="search flex">
+            <p class="search-text">Szűrés:</p>
+            <input class="search-key" type="text" class="search-key" [(ngModel)]="searchKey"/>
         </div>
-        <p class="student-balance" [ngClass]="{'red': student.balance < 0, 'green': student.balance > 0}">{{student.balance}} Ft</p>
-        <button class="student-delete" (click)="deleteStudent(index)">X</button>
+        <div class="filter-minus-balance">
+            <input type="checkbox" class="isOwe" name="isOwe" [(ngModel)]="isShowMinusBalance"/>
+            <label for="isOwe">Tartozik ({{countMinusBalance()}})</label>
+        </div>
+        <div class="filter-zero-balance">
+            <input type="checkbox" class="isOwe" name="isOwe" checked [(ngModel)]="isShowZeroBalance"/>
+            <label for="isOwe">Null számlás ({{countZeroBalance()}})</label>
+        </div>
+        <div class="filter-plus-balance">
+            <input type="checkbox" class="isOwe" name="isOwe" checked [(ngModel)]="isShowPlusBalance"/>
+            <label for="isOwe">Plusz számlás ({{countPlusBalance()}})</label>
+        </div>
+    </div>
+    <div class="add-student">
+        <button skipLocationChange routerLink="/newStudent">Új tanuló</button>
+    </div>
+    <div class="students">
+        <div class="student flex"
+             *ngFor="let student of students
+                    | search: searchKey
+                    | isShowMinusbalance: isShowMinusBalance
+                    | isShowZerobalance: isShowZeroBalance
+                    | isShowPlusbalance: isShowPlusBalance,
+                    let index = index"
+        >
+            <div class="student-name-container">
+                <button class="student-modify" skipLocationChange routerLink="/modifyStudent" (click)="modifySV.student = student"></button>
+                <button class="student-name" [ngClass]="{'red': student.balance < 0, 'green': student.balance > 0}">{{student.name}}</button>
+            </div>
+            <p class="student-balance" [ngClass]="{'red': student.balance < 0, 'green': student.balance > 0}">{{student.balance}} Ft</p>
+            <button class="student-delete" (click)="deleteStudent(index)"></button>
+        </div>
     </div>
 </div>
