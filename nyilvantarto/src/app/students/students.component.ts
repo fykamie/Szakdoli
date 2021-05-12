@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { LoadingService } from '../loading.service';
 import { ModifyService } from '../modify.service';
 import { ServerService } from '../server.service';
-import { Student } from '../student';
 
 @Component({
   selector: 'students',
@@ -18,16 +17,22 @@ export class StudentsComponent implements OnInit {
   public isShowPlusBalance = true;
 
 
-  constructor(private router: Router, public server: ServerService, public modifySV: ModifyService) {
-    server.getStudents().then(storedStudents => {
+  constructor(public server: ServerService, public modifySV: ModifyService, public loadingSV: LoadingService) {
+    this.getStudents();
+   }
+
+  ngOnInit(): void {
+  }
+
+  private async getStudents() {
+    this.loadingSV.isLoading = true;
+    await this.server.getStudents().then(storedStudents => {
       if (!Array.isArray(storedStudents)) alert(`Hiba a tanulók lekérésekor.\n${storedStudents}`);
       storedStudents.forEach(student => {
         this.students.push(student);
       });
     });
-   }
-
-  ngOnInit(): void {
+    this.loadingSV.isLoading = false;
   }
 
   public countZeroBalance(): number {
@@ -42,15 +47,17 @@ export class StudentsComponent implements OnInit {
     return this.students.filter(student => student.balance < 0).length;
   }
 
-  public deleteStudent(index: number): void {
+  public async deleteStudent(index: number) {
     if (confirm(`Biztos törlöd ${this.students[index].name} nevű tanulót és adatait a rendszerből?`)) {
-      this.server.deleteStudent(this.students[index]._id).then(deleteInfo => {
+      this.loadingSV.isLoading = true;
+      await this.server.deleteStudent(this.students[index]._id).then(deleteInfo => {
         if (deleteInfo.message) {
           alert(deleteInfo.message);
           return;
         }
         this.students.splice(index, 1);
       });
+      this.loadingSV.isLoading = false;
     }
   }
 

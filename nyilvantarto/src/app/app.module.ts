@@ -13,6 +13,7 @@ import { IsShowMinusbalancePipe } from './is-show-minusbalance.pipe';
 import { IsShowZerobalancePipe } from './is-show-zerobalance.pipe';
 import { IsShowPlusbalancePipe } from './is-show-plusbalance.pipe';
 import { ModifyBalanceComponent } from './modify-balance/modify-balance.component';
+import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ModifyBalanceComponent } from './modify-balance/modify-balance.componen
     IsShowMinusbalancePipe,
     IsShowZerobalancePipe,
     IsShowPlusbalancePipe,
-    ModifyBalanceComponent
+    ModifyBalanceComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,

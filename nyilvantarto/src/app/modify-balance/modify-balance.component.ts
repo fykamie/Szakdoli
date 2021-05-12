@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { LoadingService } from '../loading.service';
 import { ServerService } from '../server.service';
 import { Student } from '../student';
 
@@ -13,7 +14,7 @@ export class ModifyBalanceComponent implements OnInit {
   public oweAmount: number;
   public payment: number;
 
-  constructor(public server: ServerService) {
+  constructor(public server: ServerService, public loadingSV: LoadingService) {
     this.oweAmount = 0;
     this.payment = 0;
   }
@@ -27,6 +28,7 @@ export class ModifyBalanceComponent implements OnInit {
       return;
     }
     if (this.oweAmount) {
+      this.loadingSV.isLoading = true;
       await this.server.addOweTo(this.student._id, this.oweAmount).then(newBalance => {
         if (newBalance.message) {
           alert(newBalance.message);
@@ -34,9 +36,11 @@ export class ModifyBalanceComponent implements OnInit {
         }
         alert("Sikeresen elkönyvelt tartozás!");
         this.student.balance = newBalance;
-      })
+      });
+      this.loadingSV.isLoading = false;
     }
     if (this.payment) {
+      this.loadingSV.isLoading = true;
       await this.server.addPaymentTo(this.student._id, this.payment).then(newBalance => {
         if (newBalance.message) {
           alert(newBalance.message);
@@ -45,6 +49,7 @@ export class ModifyBalanceComponent implements OnInit {
         alert("Sikeres fizetés!");
         this.student.balance = newBalance;
       });
+      this.loadingSV.isLoading = false;
     }
   }
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoadingService } from '../loading.service';
 import { ModifyService } from '../modify.service';
 import { ServerService } from '../server.service';
 import { Student } from '../student';
@@ -11,24 +12,26 @@ import { Student } from '../student';
 export class ModifyStudentComponent implements OnInit {
   public student = new Student();
 
-  constructor(private server: ServerService, private modifySV: ModifyService) {
+  constructor(private server: ServerService, private modifySV: ModifyService, public loadingSV: LoadingService) {
     this.student = modifySV.student
   }
 
   ngOnInit(): void {
   }
 
-  public save(): void {
+  public async save() {
     let validation = this.getValidation();
 
     if (validation.isValide) {
-      this.server.modifyStudent(this.student).then(modifiedStudentInfo => {
+      this.loadingSV.isLoading = true;
+      await this.server.modifyStudent(this.student).then(modifiedStudentInfo => {
         if (modifiedStudentInfo.message) {
           alert(modifiedStudentInfo.message);
           return;
         }
         alert("Sikeres mentés");
       });
+      this.loadingSV.isLoading = false;
     } else {
       alert(validation.validationMsg);
     }

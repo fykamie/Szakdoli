@@ -3,7 +3,7 @@ export class Student {
     public name: string;
     public hourfee: number;
     public balance: number = 0;
-    public isShown = false;
+    public isModifyingBalance = false;
 
     constructor() {
         this.name = "";
