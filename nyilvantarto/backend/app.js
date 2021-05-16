@@ -8,6 +8,7 @@ const logger = require('./logger');
 const app = express();
 const port = 4201;
 require('dotenv/config'); // DB connenction on mlab.com in file
+/** DB_CONNECTION=mongodb+srv://Me:test@szakdolicluster.jsptw.mongodb.net/students?retryWrites=true&w=majority */
 
 //Middlewares
 app.use(cors());

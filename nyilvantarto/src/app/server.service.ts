@@ -6,10 +6,10 @@ import { Student } from './student';
   providedIn: 'root'
 })
 export class ServerService {
-  private _baseStudentURL = "http://localhost:4201/db/students";
-  private _addStudentURL = "http://localhost:4201/db/addStudent";
-  private _addPaymentURL = "http://localhost:4201/db/students/addPayment";
-  private _addOweURL = "http://localhost:4201/db/students/addAppearance";
+  private _baseStudentURL = "http://192.168.53.254:4201/db/students";
+  private _addStudentURL = "http://192.168.53.254:4201/db/addStudent";
+  private _addPaymentURL = "http://192.168.53.254:4201/db/students/addPayment";
+  private _addOweURL = "http://192.168.53.254:4201/db/students/addAppearance";
 
   constructor() { }
 
